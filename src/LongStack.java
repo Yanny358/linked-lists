@@ -89,6 +89,7 @@ public class LongStack {
          case "/" -> push(num1 / num2);
          default -> throw new IllegalArgumentException("Invalid operation: " + s);
       }
+      /* https://enos.itcollege.ee/~japoia/algorithms/examples/IntStack.java */
    }
   
    public long tos() {
@@ -197,7 +198,7 @@ public class LongStack {
          throw new RuntimeException();
       }
       return ptr.head.data;
-
+      /*https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#Java_2 */
    }
 
 }
