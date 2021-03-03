@@ -1,5 +1,7 @@
 import java.util.EmptyStackException;
 
+import static org.junit.Assert.assertEquals;
+
 
 class Node
 {
@@ -20,7 +22,7 @@ class Node
 
 public class LongStack {
 
-   private Node head;
+   private  Node head;
 
    public void display(){
       if (this.head == null){
@@ -34,18 +36,8 @@ public class LongStack {
    }
 
    public static void main (String[] argum) {
-      LongStack m1 = new LongStack();
-      m1.push (5);
-      m1.push (4);
-      LongStack m2 = null;
-      try {
-         m2 = (LongStack)m1.clone();
-      } catch (CloneNotSupportedException e) {};
-      m1.display();
-      System.out.println("----------");
-      m2.display();
-      System.out.println(m1);
-      System.out.println(m2);
+      String s = "156 154 152 - 3 + -";
+      LongStack.interpret (s);
    }
 
    LongStack() {
@@ -57,7 +49,7 @@ public class LongStack {
       LongStack tmp = new LongStack();
       Node ptr = this.head;
       while (ptr != null){
-         tmp.head = head;
+         tmp.head = this.head;
          ptr = ptr.next;
       }
       return tmp;
@@ -85,7 +77,18 @@ public class LongStack {
    }
 
    public void op (String s) {
-      // TODO!!!
+      Node ptr = this.head;
+      if (ptr.data < 1)
+         throw new IndexOutOfBoundsException(" too few elements for " + s);
+      long num2 = pop();
+      long num1 = pop();
+      switch (s) {
+         case "+" -> push(num1 + num2);
+         case "-" -> push(num1 - num2);
+         case "*" -> push(num1 * num2);
+         case "/" -> push(num1 / num2);
+         default -> throw new IllegalArgumentException("Invalid operation: " + s);
+      }
    }
   
    public long tos() {
@@ -140,9 +143,61 @@ public class LongStack {
       return sb.toString();
       /* https://stackoverflow.com/questions/37766590/implementing-a-tostring-method-to-print-out-a-linkedlist */
    }
+   public long size(){
+      if (this.head == null){
+         return 0;
+      }
+      Node temp = this.head;
+      long count = 0;
+      while (temp != null){
+         count++;
+         temp = temp.next;
+      }
+      return count;
+   }
 
    public static long interpret (String pol) {
-      return 0; // TODO!!! Your code here!
+      LongStack ptr = new LongStack();
+      for (String token : pol.trim().split("\\s+")){
+         switch (token) {
+            case "*" -> {
+               long secondOperand = ptr.pop();
+               long firstOperand = ptr.pop();
+               ptr.push(firstOperand * secondOperand);
+
+            }
+            case "/" -> {
+               long secondOperand = ptr.pop();
+               long firstOperand = ptr.pop();
+               ptr.push(firstOperand / secondOperand);
+
+            }
+            case "-" -> {
+               long secondOperand = ptr.pop();
+               long firstOperand = ptr.pop();
+               ptr.push(firstOperand - secondOperand);
+
+            }
+            case "+" -> {
+               long secondOperand = ptr.pop();
+               long firstOperand = ptr.pop();
+               ptr.push(firstOperand + secondOperand);
+
+            }
+            default -> {
+               try {
+                  ptr.push(Long.parseLong(token + ""));
+               } catch (NumberFormatException e) {
+                  throw new NumberFormatException();
+               }
+            }
+         }
+      }
+      if (ptr.size() > 1) {
+         throw new RuntimeException();
+      }
+      return ptr.head.data;
+
    }
 
 }
