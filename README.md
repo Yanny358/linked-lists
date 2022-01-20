@@ -23,14 +23,8 @@ Check whether two stacks are equal: <code>boolean equals (Object o)</code>
 
 **Write a method**
 
-**public static long interpret (String pol) 
-to calculate the value of an arithmetic expression pol in RPN
-(Reverse Polish Notation) using this stack type. 
-Expression is a string which contains long integers (including negative and
-multi-digit numbers) and arithmetic operations + - * / 
-separated by whitespace symbols. The result must be a long integer value of 
-the expression or throwing a RuntimeException in case the expression 
-is not correct. Expression is not correct if it contains illegal symbols, 
-leaves redundant elements on top of stack or causes stack underflow.
+*public static long interpret (String pol)*
+*to calculate the value of an arithmetic expression pol in RPN*
+*(Reverse Polish Notation) using this stack type.*
 
 ### Example <code>LongStack.interpret ("2 15 -")</code> should return -13
