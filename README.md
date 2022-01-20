@@ -1,61 +1,37 @@
-# README #
+## Implement an abstract data type "Stack of long integers" (LIFO) using linkedlists. String representation of a stack (provided by toString method) must be ordered from bottom to top (tos is the last element). 
 
-This repository is read-only, make a private fork in the bitbucket server
-for your own files. Clone this forked repository to your local computer and solve
-the task.
+**List of compulsory operations:
 
-See on kolmanda kodutöö failide hoidla, mida saab kasutada ainult algseks lugemiseks.
-Töötamiseks looge endale isiklik repositoorium, näiteks privaatne 'fork' bitbucket serverisse, millest saate luua klooni oma arvutisse.
+Constructor for a new stack:  <code>LongStack()</code>
 
-## Command line examples. Näidete kasutamine käsurealt ##
-#### Compilation. Kompileerimine: ####
+Copy of the stack: <code>Object clone()</code>
 
-```
-#!bash
+Check whether the stack is empty: <code>boolean stEmpty()</code>
 
-javac -cp src src/LongStack.java
-```
+Adding an element to the stack: <code>void push (long a)</code>
 
-#### Execution. Käivitamine: ####
+Removing an element from the stack: <code>long pop()</code>
 
-```
-#!bash
+Arithmetic operations(+ - * /) between two
+topmost elements of the stack (result is left on top): 
+void op (String s)
 
-java -cp src LongStack
-```
+Reading the top without removing it: long tos()
 
+Check whether two stacks are equal: boolean equals (Object o)
 
-### Usage of tests. Testide kasutamine ###
-#### Compilation of a test. Testi kompileerimine: ####
+Conversion of the stack to string (top last): String toString()**
 
-```
-#!bash
+**Write a method 
 
-javac -encoding utf8 -cp 'src:test:test/junit-4.13.1.jar:test/hamcrest-core-1.3.jar' test/LongStackTest.java
+public static long interpret (String pol) 
+to calculate the value of an arithmetic expression pol in RPN
+(Reverse Polish Notation) using this stack type. 
+Expression is a string which contains long integers (including negative and
+multi-digit numbers) and arithmetic operations + - * / 
+separated by whitespace symbols. The result must be a long integer value of 
+the expression or throwing a RuntimeException in case the expression 
+is not correct. Expression is not correct if it contains illegal symbols, 
+leaves redundant elements on top of stack or causes stack underflow.
 
-```
-In Windows replace colons by semicolons. Sama Windows aknas (koolonite asemel peavad olema semikoolonid):
-
-```
-#!bash
-
-javac -encoding utf8 -cp 'src;test;test/junit-4.13.1.jar;test/hamcrest-core-1.3.jar' test/LongStackTest.java
-
-
-```
-
-#### Running a test. Testi käivitamine: ####
-
-```
-#!bash
-
-java -cp 'src:test:test/junit-4.13.1.jar:test/hamcrest-core-1.3.jar' org.junit.runner.JUnitCore LongStackTest
-```
-
-The same for Windows. Sama Windows aknas (koolonite asemel semikoolonid):
-
-```
-#!bash
-
-java -cp 'src;test;test/junit-4.13.1.jar;test/hamcrest-core-1.3.jar' org.junit.runner.JUnitCore LongStackTest
-```
+Example LongStack.interpret ("2 15 -") should return -13**
